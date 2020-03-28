@@ -1,0 +1,42 @@
+.container {
+    box-sizing: border-box;
+    margin: 0px;
+}
+
+.search-block {
+    background-color: lightgray;
+}
+
+#search-button {
+    background-color: blue;
+    color: white;
+}
+
+#today {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid black;
+    margin: 0 auto;
+  }
+
+#five-day {
+    box-sizing: border-box;
+    margin: 0 auto;
+}
+
+#days {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 10px;
+}
+
+.card {
+    width: 18%;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+}
