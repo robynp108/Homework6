@@ -40,3 +40,28 @@
     display: flex;
     flex-direction: column;
 }
+
+.very-low {
+    background-color: #00cccc;
+    color: white;
+}
+
+.low {
+    background-color: #66cc33;
+    color: white;
+}
+
+.moderate {
+    background-color: #FF9900;
+    color: white;
+}
+
+.high {
+    background-color: #FF3300;
+    color: white;
+}
+
+.very-high {
+    background-color: #FF3399;
+    color: white;
+}

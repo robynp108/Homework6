@@ -29,7 +29,7 @@ $("#search-button").on("click", function (event) {
             var tempF = (response.main.temp - 273.15) * 1.80 + 32;
             $(".temp").text("Temperature: " + tempF.toFixed(2) + " F");
 
-            $(".wind").text("Wind Speed: " + response.wind.speed + "MPH");
+            $(".wind").text("Wind Speed: " + response.wind.speed + " MPH");
             $(".humidity").text("Humidity: " + response.main.humidity + "%");
 
             var inputLat = response.coord.lat;
@@ -47,6 +47,18 @@ $("#search-button").on("click", function (event) {
                     console.log(UVresponse);
 
                     $("#uv-index").text(UVresponse.value);
+
+                    if (UVresponse.value < 3) {
+                        $("#uv-index").addClass("very-low");
+                    } else if (UVresponse.value >= 3 && UVresponse.value < 5) {
+                        $("#uv-index").addClass("low");
+                    } else if (UVresponse.value >= 5 && UVresponse.value < 7) {
+                        $("#uv-index").addClass("moderate");
+                    } else if (UVresponse.value >= 7 && UVresponse.value < 10) {
+                        $("#uv-index").addClass("high");
+                    } else {
+                        $("#uv-index").addClass("very-high");
+                    }
                 });
 
         });
