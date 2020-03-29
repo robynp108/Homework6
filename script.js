@@ -13,6 +13,8 @@ $("#search-button").on("click", function (event) {
     searchHistBtn.text(prevSearch);
     $("#search-history").prepend(searchHistBtn);
 
+    var date = moment().format("MM/DD/YYYY");
+    
     var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + input + "&APPID=6271303875633c1ede72b0a41c1ebb3c";
 
     $.ajax({
@@ -24,7 +26,13 @@ $("#search-button").on("click", function (event) {
             console.log(queryURL);
             console.log(response);
 
-            $(".city").html("<h1>" + response.name + "</h1>");
+            var iconCode = response.weather[0].icon;
+            console.log(iconCode);
+            var iconTodayURL = "http://openweathermap.org/img/wn/" + iconCode + "@2x.png";
+
+            //$(".city").html("<h2>" + response.name + ": " + date + "</h2>");
+            $("#city").text(response.name + ": " + date);
+            $("#icon").attr("src", iconTodayURL);
 
             var tempF = (response.main.temp - 273.15) * 1.80 + 32;
             $(".temp").text("Temperature: " + tempF.toFixed(2) + " F");
