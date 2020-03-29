@@ -1,17 +1,23 @@
+
 $("#search-button").on("click", function (event) {
     event.preventDefault();
 
     var inputEl = $("#input-city");
     var input = inputEl.val();
     console.log(input);
+
     localStorage.setItem("input", input);
 
     var prevSearch = localStorage.getItem("input");
     console.log(prevSearch);
 
     var searchHistBtn = $("<button>");
+    searchHistBtn.addClass("searchBtns");
+    searchHistBtn.attr("id", input);
     searchHistBtn.text(prevSearch);
     $("#search-history").prepend(searchHistBtn);
+    
+    function search (place) {
 
     var date = moment().format("MM/DD/YYYY");
     
@@ -71,7 +77,16 @@ $("#search-button").on("click", function (event) {
 
         });
 
-    var forecastQueryURL = "api.openweathermap.org/data/2.5/forecast?q=" + input + "&appid=6271303875633c1ede72b0a41c1ebb3c";
+    //var forecastQueryURL = "api.openweathermap.org/data/2.5/forecast?q=" + input + "&appid=6271303875633c1ede72b0a41c1ebb3c";
+    };
 
+    search (input);
+   
+    searchHistBtn.on("click", function (event) {
+        event.preventDefault();
+        var place = $(this).attr("id");
+        search (place);
+    });   
 
 });
+
