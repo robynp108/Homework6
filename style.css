@@ -1,13 +1,5 @@
-.title {
-    text-align: center;
-}
-
 .container {
     box-sizing: border-box;
-    width: 100%;
-    margin-left: 0;
-    margin-right: 0;
-    
 }
 
 .search-block {
@@ -19,19 +11,13 @@
     color: white;
 }
 
-.data {
-    box-sizing: border-box;
-    margin-right: 0px;
-    
-}
-
 #today {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     border: 2px solid black;
     margin: 0 auto;
-  }
+}
 
 #city {
     font-size: x-large;
