@@ -1,7 +1,7 @@
-
+//Event handler for search button, initialtes most of functionality
 $("#search-button").on("click", function (event) {
     event.preventDefault();
-
+    //local storage for search history and create buttons for past searches
     var inputEl = $("#input-city");
     var input = inputEl.val();
 
@@ -14,11 +14,11 @@ $("#search-button").on("click", function (event) {
     searchHistBtn.attr("id", input);
     searchHistBtn.text(prevSearch);
     $("#search-history").prepend(searchHistBtn);
-
+    // placed all data retrieval code inside a fuction to be called again by search history buttons
     function search(place) {
 
         var date = moment().format("MM/DD/YYYY");
-
+        // ajax request for today's weather data
         var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + input + "&APPID=6271303875633c1ede72b0a41c1ebb3c";
 
         $.ajax({
@@ -38,7 +38,7 @@ $("#search-button").on("click", function (event) {
 
                 $(".wind").text("Wind Speed: " + response.wind.speed + " MPH");
                 $(".humidity").text("Humidity: " + response.main.humidity + "%");
-
+                // need separate ajax request for UV data
                 var inputLat = response.coord.lat;
                 var inputLon = response.coord.lon;
 
@@ -52,6 +52,8 @@ $("#search-button").on("click", function (event) {
                         console.log(UVresponse);
 
                         $("#uv-index").text(UVresponse.value);
+                       
+                       // adding classes for color coding of UV ranges; need to remove any previously added classes first
                         $("#uv-index").removeAttr("class");
 
                         if (UVresponse.value < 3) {
@@ -68,7 +70,7 @@ $("#search-button").on("click", function (event) {
                     });
 
             });
-
+        // dates for 5 day forecast
         var date1 = moment().add(1, "day").format("MM/DD/YYYY");
         var date2 = moment().add(2, "day").format("MM/DD/YYYY");
         var date3 = moment().add(3, "day").format("MM/DD/YYYY");
@@ -80,17 +82,15 @@ $("#search-button").on("click", function (event) {
         $("#day-3").text(date3);
         $("#day-4").text(date4);
         $("#day-5").text(date5);
-
+        // need third ajax request for 5 day forecast
         var forecastQueryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + input + "&appid=6271303875633c1ede72b0a41c1ebb3c";
-
-
 
         $.ajax({
             url: forecastQueryURL,
             method: "GET"
         })
             .then(function (response) {
-
+                // 5 day data given as index in array with data for every 3 hours; picked one out of every 24 hours to display
                 var icon1Code = response.list[7].weather[0].icon;
                 var icon2Code = response.list[15].weather[0].icon;
                 var icon3Code = response.list[23].weather[0].icon;
@@ -131,7 +131,7 @@ $("#search-button").on("click", function (event) {
     };
 
     search(input);
-
+    // event handler for search history buttons
     searchHistBtn.on("click", function (event) {
         event.preventDefault();
         var place = $(this).attr("id");
